@@ -1,0 +1,20 @@
+{
+  "name": "react-express-mysql-nginx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Terence625/react-express-mysql-nginx.git"
+  },
+  "keywords": [],
+  "author": "Terence",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Terence625/react-express-mysql-nginx/issues"
+  },
+  "homepage": "https://github.com/Terence625/react-express-mysql-nginx#readme"
+}
