@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  react-app:
+  frontend:
     build:
       context: ./frontend
       target: development
@@ -8,5 +8,20 @@ services:
       - 3000:3000
     volumes:
       - ./frontend/src:/app/src:ro
+      - front-notused:/app/node_modules
     env_file:
       - ./frontend/.env
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - 3001:3001
+    volumes:
+      - ./backend:/app:ro
+      - back-notused:/app/node_modules
+    command: npm run dev
+
+volumes:
+  front-notused:
+  back-notused:
