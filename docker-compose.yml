@@ -9,8 +9,8 @@ services:
     volumes:
       - ./frontend/src:/app/src:ro
       - front-notused:/app/node_modules
-    env_file:
-      - ./frontend/.env
+    environment:
+      - NODE_ENV=development
 
   backend:
     build:
@@ -18,7 +18,7 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - ./backend:/app:ro
+      - ./backend/src:/app/src:ro
       - back-notused:/app/node_modules
     command: npm run dev
 
