@@ -21,7 +21,21 @@ services:
       - ./backend/src:/app/src:ro
       - back-notused:/app/node_modules
     command: npm run dev
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+      - MYSQL_DB=db
+
+  mysql:
+    image: mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
 
 volumes:
   front-notused:
   back-notused:
+  mysql-data:
