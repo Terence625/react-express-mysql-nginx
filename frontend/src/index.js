@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import FilterableProductTable from "./component/FilterableProductTable/FilterableProductTable";
+import FilterableProductTable from "./components/FilterableProductTable/FilterableProductTable";
 
 const PRODUCTS = [
   {
