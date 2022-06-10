@@ -2,6 +2,7 @@ import FilterableProductTable from "./components/FilterableProductTable/Filterab
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 import About from "./components/About";
+import { CreateClientForm } from "./components/CreateClientForm/CreateClientForm";
 
 const PRODUCTS = [
   {
@@ -45,6 +46,7 @@ const App = () => {
           path="/"
           element={<FilterableProductTable products={PRODUCTS} />}
         />
+        <Route path="/createClient" element={<CreateClientForm />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
