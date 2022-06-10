@@ -6,6 +6,7 @@ const local = require("./strategies/local");
 const usersRoute = require("./routes/users");
 const postsRoute = require("./routes/posts");
 const authRoute = require("./routes/auth");
+const createClinetRoute = require("./routes/createClient");
 const db = require("./database");
 const store = new session.MemoryStore();
 
@@ -32,6 +33,7 @@ app.use(passport.session());
 app.use("/users", usersRoute);
 app.use("/posts", postsRoute);
 app.use("/auth", authRoute);
+app.use("/createClient", createClinetRoute);
 
 const port = process.env.PORT || 3000;
 

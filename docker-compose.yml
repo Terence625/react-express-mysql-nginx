@@ -26,6 +26,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
       - MYSQL_DB=db
+    depends_on:
+      - mysql
 
   mysql:
     image: mysql
