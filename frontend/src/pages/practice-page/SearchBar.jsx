@@ -1,6 +1,7 @@
 import React from "react";
 
 const SearchBar = (props) => {
+  console.log(props)
   const filterText = props.filterText;
   const inStockOnly = props.inStockOnly;
 

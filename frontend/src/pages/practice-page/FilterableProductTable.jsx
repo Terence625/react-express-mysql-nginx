@@ -1,5 +1,5 @@
-import ProductTable from "../ProductTable";
-import SearchBar from "../SearchBar";
+import ProductTable from "./ProductTable";
+import SearchBar from "./SearchBar";
 import React, { useState } from "react";
 import "./FilterableProductTable.css";
 
