@@ -7,6 +7,7 @@ const usersRoute = require("./routes/users");
 const postsRoute = require("./routes/posts");
 const authRoute = require("./routes/auth");
 const createClinetRoute = require("./routes/createClient");
+const searchClientRoute = require("./routes/searchClient");
 const db = require("./database");
 const store = new session.MemoryStore();
 
@@ -36,6 +37,12 @@ app.use("/users", usersRoute);
 app.use("/posts", postsRoute);
 app.use("/auth", authRoute);
 app.use("/createClient", createClinetRoute);
+app.use("/searchClient", searchClientRoute);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send("internal server error");
+})
 
 const port = process.env.PORT || 3000;
 
