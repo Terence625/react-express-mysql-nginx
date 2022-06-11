@@ -23,7 +23,6 @@ const CreateClientPage = () => {
       });
       setClientId(result.data.clientId);
     } catch (error) {
-      console.log(error)
       setIsError(true);
     }
     setIsLoading(false);
