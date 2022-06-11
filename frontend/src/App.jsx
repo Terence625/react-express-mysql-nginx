@@ -43,7 +43,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/practice"
           element={<FilterableProductTable products={PRODUCTS} />}
         />
         <Route path="/createClient" element={<CreateClientForm />} />

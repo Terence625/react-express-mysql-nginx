@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./CreateClientForm.css"
 
 export const CreateClientForm = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
@@ -13,7 +14,7 @@ export const CreateClientForm = () => {
     try {
       const result = await axios({
         method: "post",
-        url: "http://localhost:3001/createClient",
+        url: "/createClient",
         data: {
           name: formText.name,
           phone: formText.phone,
