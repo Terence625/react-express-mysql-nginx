@@ -1,8 +1,8 @@
-import FilterableProductTable from "./components/FilterableProductTable/FilterableProductTable";
+import FilterableProductTable from "./pages/practice-page/FilterableProductTable";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-import About from "./components/About";
-import { CreateClientForm } from "./components/CreateClientForm/CreateClientForm";
+import About from "./pages/About";
+import { CreateClientForm } from "./pages/create-client-page/components/CreateClientForm";
 
 const PRODUCTS = [
   {
