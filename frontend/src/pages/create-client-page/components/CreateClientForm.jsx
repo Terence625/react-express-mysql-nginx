@@ -5,7 +5,7 @@ const CreateClientForm = (props) => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        props.submitData(e);
+        props.submitData();
       }}
     >
       <label>

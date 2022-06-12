@@ -11,6 +11,7 @@ const CreateClientPage = () => {
   const [isError, setIsError] = useState(false);
 
   const submitData = async () => {
+    setIsLoading(true);
     try {
       const result = await axios({
         method: "post",

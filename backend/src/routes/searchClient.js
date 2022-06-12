@@ -9,7 +9,7 @@ router.get("/", async (req, res, next) => {
     const searchClientResult = await db.pool
       .promise()
       .query(`SELECT * FROM client_info WHERE name LIKE "%${name}%"`);
-    res.status(200).send(searchClientResult[0]);
+    res.status(200).json({ clientInfo: searchClientResult[0] });
   } catch (err) {
     next(err);
   }
