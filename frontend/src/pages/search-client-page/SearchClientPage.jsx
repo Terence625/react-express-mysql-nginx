@@ -3,10 +3,12 @@ import Error from "../../ui-components/Error";
 import PageLoading from "../../ui-components/PageLoading";
 import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
+import ResultList from "./components/ResultList";
 
 const SearchClientPage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState({ clientInfo: [] });
+  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -22,6 +24,7 @@ const SearchClientPage = () => {
       setIsError(true);
     }
     setIsLoading(false);
+    setCurrentPage(1);
   };
 
   return (
@@ -33,11 +36,11 @@ const SearchClientPage = () => {
       />
       {isError && <Error />}
       {isLoading && <PageLoading />}
-      <ul>
-        {searchResult.clientInfo.map((item) => (
-          <li key={item.client_id}>{item.name}</li>
-        ))}
-      </ul>
+      <ResultList
+        searchResult={searchResult}
+        currentPage={currentPage}
+        onSelectPage={(value) => setCurrentPage(value)}
+      />
     </div>
   );
 };
