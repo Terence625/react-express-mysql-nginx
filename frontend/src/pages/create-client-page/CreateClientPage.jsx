@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Error from "../../ui-components/Error";
-import PageLoading from "../../ui-components/PageLoading";
+import Error from "../common/Error";
+import PageLoading from "../common/PageLoading";
 import CreateClientForm from "./components/CreateClientForm";
 import axios from "axios";
 

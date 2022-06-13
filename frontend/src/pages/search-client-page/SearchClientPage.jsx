@@ -1,6 +1,6 @@
 import axios from "axios";
-import Error from "../../ui-components/Error";
-import PageLoading from "../../ui-components/PageLoading";
+import Error from "../common/Error";
+import PageLoading from "../common/PageLoading";
 import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import ResultList from "./components/ResultList";
