@@ -8,8 +8,6 @@ const ResultList = (props) => {
     (props.currentPage - 1) * listsPerPage,
     props.currentPage * listsPerPage
   );
-  console.log(props.searchResult.clientInfo);
-  console.log(pageLists);
 
   for (
     let i = 1;
@@ -27,11 +25,12 @@ const ResultList = (props) => {
         ))}
       </ul>
       <ul className="PageNumbers">
-        {pageNumbers.map((number) => (
+        {pageNumbers.slice(0, 10).map((number) => (
           <li
             key={number}
             id={number}
-            onClick={(e) => props.onSelectPage(e.target.id)}
+            style={number === props.currentPage ? { color: "black" } : null}
+            onClick={(e) => props.onSelectPage(parseInt(e.target.id))}
           >
             {number}
           </li>
