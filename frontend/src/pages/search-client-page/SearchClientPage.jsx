@@ -37,11 +37,13 @@ const SearchClientPage = () => {
       />
       {isError && <Error />}
       {isLoading && <PageLoading />}
-      <ResultList
-        searchResult={searchResult}
-        currentPage={currentPage}
-        onSelectPage={(value) => setCurrentPage(value)}
-      />
+      {searchResult.clientInfo.length !== 0 && (
+        <ResultList
+          searchResult={searchResult}
+          currentPage={currentPage}
+          onSelectPage={(value) => setCurrentPage(value)}
+        />
+      )}
     </div>
   );
 };
