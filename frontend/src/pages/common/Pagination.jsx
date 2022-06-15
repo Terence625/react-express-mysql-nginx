@@ -1,29 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Pagination.css";
 
-const Pagination = (props) => {
-  const pageNumbers = [];
-  for (let i = 1; i <= props.pageNumber; i++) {
-    pageNumbers.push(i);
-  }
-  pageNumbers.push(pageNumbers.at(-1));
+const range = (from, to, step = 1) => {
+  const range = [];
+  for (let i = from; i <= to; i += step) range.push(i);
+  return range;
+};
+
+const Pagination = ({
+  pageNeighbours,
+  totalPageNumber,
+  onSelectPage,
+  currentPage,
+}) => {
+  const totalPageBlocks = pageNeighbours * 2 + 5;
+  let pageNumberDisplay;
+
+  const leftBound = currentPage - pageNeighbours;
+  const rightBound = currentPage + pageNeighbours;
+  leftBound > 2 && rightBound < totalPageNumber - 1
+    ? (pageNumberDisplay = [
+        1,
+        "leftEllipsis",
+        ...range(leftBound, rightBound),
+        "rightEllipsis",
+        totalPageNumber,
+      ])
+    : leftBound <= 2 && rightBound < totalPageNumber - 1
+    ? (pageNumberDisplay = [
+        ...range(1, totalPageBlocks - 2),
+        "rightEllipsis",
+        totalPageNumber,
+      ])
+    : leftBound > 2 && rightBound >= totalPageNumber - 1
+    ? (pageNumberDisplay = [
+        1,
+        "leftEllipsis",
+        ...range(totalPageNumber - totalPageBlocks + 3, totalPageNumber),
+      ])
+    : (pageNumberDisplay = range(1, totalPageNumber));
+
+  const handleEllipsisClick = (ellipsis) => {};
 
   return (
     <ul className="PageNumbers">
-      {pageNumbers.slice(0, 5).map((number) => {
-        // if (number === "...") {
-        //   return (
-        //     <li key={}>...</li>
-        //   )
-        // }
+      {pageNumberDisplay.map((item) => {
+        const stringItem = item.toString();
+        if (stringItem.includes("Ellipsis")) {
+          return (
+            <li
+              key={stringItem}
+              onClick={(e) => {
+                e.preventDefault();
+                handleEllipsisClick(stringItem);
+              }}
+            >
+              ...
+            </li>
+          );
+        }
         return (
           <li
-            key={number}
-            id={number}
-            style={number === props.currentPage ? { color: "black" } : null}
-            onClick={(e) => props.onSelectPage(parseInt(e.target.id))}
+            key={stringItem}
+            id={stringItem}
+            style={
+              stringItem === currentPage.toString() ? { color: "black" } : null
+            }
+            onClick={(e) => {
+              e.preventDefault();
+              onSelectPage(parseInt(e.target.id));
+            }}
           >
-            {number}
+            {stringItem}
           </li>
         );
       })}

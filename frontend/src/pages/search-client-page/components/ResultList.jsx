@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Pagination from "../../common/Pagination";
 import "./ResultList.css";
 
-const ResultList = (props) => {
+const ResultList = ({searchResult, currentPage, onSelectPage}) => {
   const listsPerPage = 3;
-  const pageLists = props.searchResult.clientInfo.slice(
-    (props.currentPage - 1) * listsPerPage,
-    props.currentPage * listsPerPage
+  const pageLists = searchResult.clientInfo.slice(
+    (currentPage - 1) * listsPerPage,
+    currentPage * listsPerPage
   );
-  const pageNumber = Math.ceil(
-    props.searchResult.clientInfo.length / listsPerPage
+  const totalPageNumber = Math.ceil(
+    searchResult.clientInfo.length / listsPerPage
   );
 
   return (
@@ -20,9 +20,10 @@ const ResultList = (props) => {
         ))}
       </ul>
       <Pagination
-        pageNumber={pageNumber}
-        onSelectPage={props.onSelectPage}
-        currentPage={props.currentPage}
+        pageNeighbours={1}
+        totalPageNumber={totalPageNumber}
+        onSelectPage={onSelectPage}
+        currentPage={currentPage}
       />
     </div>
   );
