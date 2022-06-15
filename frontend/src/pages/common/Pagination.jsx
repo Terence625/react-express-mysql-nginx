@@ -40,7 +40,11 @@ const Pagination = ({
       ])
     : (pageNumberDisplay = range(1, totalPageNumber));
 
-  const handleEllipsisClick = (ellipsis) => {};
+  const handleEllipsisClick = (ellipsis) => {
+    if (ellipsis === "leftEllipsis")
+      onSelectPage(pageNumberDisplay.at(2) - pageNeighbours - 1);
+    else onSelectPage(pageNumberDisplay.at(-3) + pageNeighbours + 1);
+  };
 
   return (
     <ul className="PageNumbers">
