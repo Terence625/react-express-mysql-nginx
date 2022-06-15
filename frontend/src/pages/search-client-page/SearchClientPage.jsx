@@ -13,7 +13,7 @@ const SearchClientPage = () => {
   const [isError, setIsError] = useState(false);
 
   const receiveData = async () => {
-    // if (searchValue.replace(/\s/g, "") === "") return;
+    if (searchValue.replace(/\s/g, "") === "") return;
     setIsLoading(true);
     try {
       const result = await axios({
