@@ -1,20 +1,21 @@
 import React from "react";
 
-const ClientForm = (props) => {
+const ClientForm = ({formText, onInputChange, submitData}) => {
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        props.submitData();
+        submitData();
       }}
     >
       <label>
         Name:
         <input
           type="text"
-          value={props.formText.name}
+          value={formText.name}
           onChange={(e) =>
-            props.onInputChange({ ...props.formText, name: e.target.value })
+            onInputChange({ ...formText, name: e.target.value })
           }
         />
       </label>
@@ -22,9 +23,9 @@ const ClientForm = (props) => {
         Phone number:
         <input
           type="text"
-          value={props.formText.phone}
+          value={formText.phone}
           onChange={(e) =>
-            props.onInputChange({ ...props.formText, phone: e.target.value })
+            onInputChange({ ...formText, phone: e.target.value })
           }
         />
       </label>
@@ -32,9 +33,9 @@ const ClientForm = (props) => {
         E-mail:
         <input
           type="text"
-          value={props.formText.email}
+          value={formText.email}
           onChange={(e) =>
-            props.onInputChange({ ...props.formText, email: e.target.value })
+            onInputChange({ ...formText, email: e.target.value })
           }
         />
       </label>

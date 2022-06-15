@@ -36,6 +36,17 @@ app.use("/auth", authRoute);
 app.use("/createClient", createClinetRoute);
 app.use("/searchClient", searchClientRoute);
 app.use("/updateClient", updateClientRoute);
+app.get("/:id", async (req, res, next) => {
+  const clientId = req.params.id;
+  try {
+    const searchClientResult = await db.pool
+      .promise()
+      .query("SELECT * FROM client_info WHERE client_id = ?", [clientId]);
+    res.status(200).json({ clientInfo: searchClientResult[0] });
+  } catch (err) {
+    next(err);
+  }
+});
 
 app.use((err, req, res, next) => {
   console.log(err);
