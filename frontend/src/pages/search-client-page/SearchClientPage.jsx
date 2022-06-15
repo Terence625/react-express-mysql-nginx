@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const SearchClientPage = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [searchResult, setSearchResult] = useState({ clientInfo: [] });
+  const [searchResult, setSearchResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -21,7 +21,8 @@ const SearchClientPage = () => {
         method: "get",
         url: `/searchClient?name=${searchValue}`,
       });
-      setSearchResult(result.data);
+      console.log(result.data.clientInfo)
+      setSearchResult(result.data.clientInfo)
     } catch (error) {
       setIsError(true);
     }
@@ -39,7 +40,7 @@ const SearchClientPage = () => {
       <Link to={"/createClient"}>Create New Client</Link>
       {isError && <Error />}
       {isLoading && <PageLoading />}
-      {searchResult.clientInfo.length !== 0 && (
+      {searchResult.length !== 0 && (
         <ResultList
           searchResult={searchResult}
           currentPage={currentPage}

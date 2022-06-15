@@ -18,27 +18,29 @@ const Pagination = ({
 
   const leftBound = currentPage - pageNeighbours;
   const rightBound = currentPage + pageNeighbours;
-  leftBound > 2 && rightBound < totalPageNumber - 1
-    ? (pageNumberDisplay = [
+  console.log(leftBound, rightBound, totalPageNumber - 1);
+  if (totalPageBlocks < totalPageNumber) {
+    if (leftBound > 2 && rightBound < totalPageNumber - 1)
+      pageNumberDisplay = [
         1,
         "leftEllipsis",
         ...range(leftBound, rightBound),
         "rightEllipsis",
         totalPageNumber,
-      ])
-    : leftBound <= 2 && rightBound < totalPageNumber - 1
-    ? (pageNumberDisplay = [
+      ];
+    else if (leftBound <= 2 && rightBound < totalPageNumber - 1)
+      pageNumberDisplay = [
         ...range(1, totalPageBlocks - 2),
         "rightEllipsis",
         totalPageNumber,
-      ])
-    : leftBound > 2 && rightBound >= totalPageNumber - 1
-    ? (pageNumberDisplay = [
+      ];
+    else if (leftBound > 2 && rightBound >= totalPageNumber - 1)
+      pageNumberDisplay = [
         1,
         "leftEllipsis",
         ...range(totalPageNumber - totalPageBlocks + 3, totalPageNumber),
-      ])
-    : (pageNumberDisplay = range(1, totalPageNumber));
+      ];
+  } else pageNumberDisplay = range(1, totalPageNumber);
 
   const handleEllipsisClick = (ellipsis) => {
     if (ellipsis === "leftEllipsis")

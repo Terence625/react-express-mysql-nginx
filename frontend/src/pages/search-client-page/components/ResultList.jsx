@@ -4,12 +4,12 @@ import "./ResultList.css";
 
 const ResultList = ({searchResult, currentPage, onSelectPage}) => {
   const listsPerPage = 3;
-  const pageLists = searchResult.clientInfo.slice(
+  const pageLists = searchResult.slice(
     (currentPage - 1) * listsPerPage,
     currentPage * listsPerPage
   );
   const totalPageNumber = Math.ceil(
-    searchResult.clientInfo.length / listsPerPage
+    searchResult.length / listsPerPage
   );
 
   return (
