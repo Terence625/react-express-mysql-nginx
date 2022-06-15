@@ -18,7 +18,6 @@ const Pagination = ({
 
   const leftBound = currentPage - pageNeighbours;
   const rightBound = currentPage + pageNeighbours;
-  console.log(leftBound, rightBound, totalPageNumber - 1);
   if (totalPageBlocks < totalPageNumber) {
     if (leftBound > 2 && rightBound < totalPageNumber - 1)
       pageNumberDisplay = [

@@ -21,8 +21,7 @@ const SearchClientPage = () => {
         method: "get",
         url: `/searchClient?name=${searchValue}`,
       });
-      console.log(result.data.clientInfo)
-      setSearchResult(result.data.clientInfo)
+      setSearchResult(result.data.clientList)
     } catch (error) {
       setIsError(true);
     }

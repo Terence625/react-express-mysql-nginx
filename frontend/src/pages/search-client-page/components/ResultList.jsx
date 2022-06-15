@@ -1,16 +1,16 @@
 import React from "react";
 import Pagination from "../../common/Pagination";
 import "./ResultList.css";
+import { Link } from "react-router-dom";
 
-const ResultList = ({searchResult, currentPage, onSelectPage}) => {
+
+const ResultList = ({ searchResult, currentPage, onSelectPage }) => {
   const listsPerPage = 3;
   const pageLists = searchResult.slice(
     (currentPage - 1) * listsPerPage,
     currentPage * listsPerPage
   );
-  const totalPageNumber = Math.ceil(
-    searchResult.length / listsPerPage
-  );
+  const totalPageNumber = Math.ceil(searchResult.length / listsPerPage);
 
   return (
     <div>
