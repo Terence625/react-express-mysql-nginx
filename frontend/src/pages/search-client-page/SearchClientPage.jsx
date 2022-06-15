@@ -4,6 +4,7 @@ import PageLoading from "../common/PageLoading";
 import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import ResultList from "./components/ResultList";
+import { Link } from "react-router-dom";
 
 const SearchClientPage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -35,6 +36,7 @@ const SearchClientPage = () => {
         searchValue={searchValue}
         onSearchValueChange={(value) => setSearchValue(value)}
       />
+      <Link to={"/createClient"}>Create New Client</Link>
       {isError && <Error />}
       {isLoading && <PageLoading />}
       {searchResult.clientInfo.length !== 0 && (
