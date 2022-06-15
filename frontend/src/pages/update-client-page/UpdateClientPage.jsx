@@ -11,7 +11,6 @@ const UpdateClientPage = () => {
   const [isError, setIsError] = useState(false);
   const { clientId } = useParams();
 
-  console.log(clientId)
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -34,6 +33,25 @@ const UpdateClientPage = () => {
     };
     fetchData();
   }, []);
+
+  const submitData = async () => {
+    setIsLoading(true);
+    try {
+      const result = await axios({
+        method: "post",
+        url: "/createClient",
+        data: {
+          name: formText.name,
+          phone: formText.phone,
+          email: formText.email,
+        },
+      });
+      setClientId(result.data.clientId);
+    } catch (error) {
+      setIsError(true);
+    }
+    setIsLoading(false);
+  }
 
   return (
     <div>
