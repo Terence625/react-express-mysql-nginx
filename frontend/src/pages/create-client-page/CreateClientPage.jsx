@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Error from "../common/Error";
 import PageLoading from "../common/PageLoading";
-import CreateClientForm from "./components/CreateClientForm";
+import ClientForm from "../common/ClientForm";
 import axios from "axios";
 
 const CreateClientPage = () => {
@@ -31,7 +31,7 @@ const CreateClientPage = () => {
 
   return (
     <div>
-      <CreateClientForm
+      <ClientForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
         submitData={submitData}

@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreateClientForm = (props) => {
+const ClientForm = (props) => {
   return (
     <form
       onSubmit={(e) => {
@@ -43,4 +43,4 @@ const CreateClientForm = (props) => {
   );
 };
 
-export default CreateClientForm;
+export default ClientForm;
