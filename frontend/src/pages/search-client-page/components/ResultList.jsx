@@ -3,7 +3,6 @@ import Pagination from "../../common/Pagination";
 import "./ResultList.css";
 import { Link } from "react-router-dom";
 
-
 const ResultList = ({ searchResult, currentPage, onSelectPage }) => {
   const listsPerPage = 3;
   const pageLists = searchResult.slice(
@@ -15,9 +14,14 @@ const ResultList = ({ searchResult, currentPage, onSelectPage }) => {
   return (
     <div>
       <ul>
-        {pageLists.map((item) => (
-          <li key={item.client_id}>{item.name}</li>
-        ))}
+        {pageLists.map((item) => {
+          console.log(item.client_id);
+          return (
+            <li key={item.client_id}>
+              <Link to={"/" + item.client_id.toString()}>{item.name}</Link>
+            </li>
+          );
+        })}
       </ul>
       <Pagination
         pageNeighbours={1}
