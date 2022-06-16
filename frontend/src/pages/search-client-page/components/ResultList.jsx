@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 const ResultList = ({ searchResult, currentPage, onSelectPage }) => {
   const listsPerPage = 3;
-  const pageLists = searchResult.slice(
+  const reversedSearchResult = searchResult.slice(0).reverse();
+  const pageLists = reversedSearchResult.slice(
     (currentPage - 1) * listsPerPage,
     currentPage * listsPerPage
   );
