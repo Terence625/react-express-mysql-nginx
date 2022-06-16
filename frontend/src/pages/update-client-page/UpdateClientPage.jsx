@@ -9,6 +9,7 @@ const UpdateClientPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
   const { clientId } = useParams();
 
   useEffect(() => {
@@ -37,31 +38,32 @@ const UpdateClientPage = () => {
   const submitData = async () => {
     setIsLoading(true);
     try {
-      const result = await axios({
-        method: "post",
-        url: "/createClient",
+      await axios({
+        method: "put",
+        url: "/updateClient/" + clientId,
         data: {
           name: formText.name,
           phone: formText.phone,
           email: formText.email,
         },
       });
-      setClientId(result.data.clientId);
+      setIsUpdated(true);
     } catch (error) {
       setIsError(true);
     }
     setIsLoading(false);
-  }
+  };
 
   return (
     <div>
       <ClientForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
-        submitData={() => console.log("submit")}
+        submitData={submitData}
       />
       {isError && <Error />}
       {isLoading && <PageLoading />}
+      {isUpdated && <div>Update successfully</div>}
     </div>
   );
 };
