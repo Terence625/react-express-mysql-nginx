@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
-const ClientForm = ({formText, onInputChange, submitData}) => {
+const ClientForm = ({ formText, onInputChange, submitData }) => {
+  const [blankInput, setBlankInput] = useState([]);
+
+  const validateData = () => {
+    const mandatoryInput = ["name", "phone"];
+    const blankInput = [];
+    mandatoryInput.forEach((item) => {
+      if (formText[item].replace(/\s/g, "") === "") blankInput.push(item);
+    });
+    return blankInput;
+  };
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        const blankInput = validateData();
+        setBlankInput(blankInput);
+        if (blankInput.length !== 0) return;
         submitData();
       }}
     >
       <label>
-        Name:
+        *Name:
         <input
           type="text"
           value={formText.name}
-          onChange={(e) =>
-            onInputChange({ ...formText, name: e.target.value })
-          }
+          onChange={(e) => onInputChange({ ...formText, name: e.target.value })}
         />
       </label>
       <label>
-        Phone number:
+        *Phone number:
         <input
           type="text"
           value={formText.phone}
@@ -39,7 +50,11 @@ const ClientForm = ({formText, onInputChange, submitData}) => {
           }
         />
       </label>
+      {!blankInput && <div>cannot be blank</div>}
       <button type="submit">Submit</button>
+      {blankInput.length !== 0 && (
+        <div>{blankInput.toString() + " should not be blank"}</div>
+      )}
     </form>
   );
 };
