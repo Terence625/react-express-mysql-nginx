@@ -1,10 +1,10 @@
 body {
   padding: 5px;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align:center;
+  text-align: center;
   padding-top: 56px;
 }
 
@@ -27,4 +27,21 @@ button {
 }
 button:hover {
   background-color: #c5c5c5;
+}
+
+form {
+  margin-bottom: 1rem;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #1a0dab;
+}
+
+a:hover {
+  text-decoration: underline;
 }
