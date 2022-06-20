@@ -26,7 +26,7 @@ const ClientForm = ({ formText, onInputChange, submitData }) => {
         }}
       >
         <label>
-          *Name:
+          <span style={{ color: "red" }}>*</span>Name:
           <input
             type="text"
             value={formText.name}
@@ -36,7 +36,7 @@ const ClientForm = ({ formText, onInputChange, submitData }) => {
           />
         </label>
         <label>
-          *Phone number:
+          <span style={{ color: "red" }}>*</span>Phone number:
           <input
             type="text"
             value={formText.phone}
@@ -61,7 +61,7 @@ const ClientForm = ({ formText, onInputChange, submitData }) => {
           <div>{blankInput.toString() + " should not be blank"}</div>
         )}
       </form>
-      <Link style={{}} to={"/searchClient"}>{"<- Back to Search"}</Link>
+      <Link to={"/searchClient"}>{"Back to Search"}</Link>
     </div>
   );
 };

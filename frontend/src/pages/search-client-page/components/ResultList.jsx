@@ -14,7 +14,7 @@ const ResultList = ({ searchResult, currentPage, onSelectPage }) => {
 
   return (
     <div>
-      <ul>
+      <ul className="ResultList">
         {pageLists.map((item) => {
           console.log(item.client_id);
           return (

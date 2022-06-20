@@ -4,7 +4,7 @@
   justify-content: center;
 }
 .PageNumbers > li {
-  margin-right: 0.3em;
+  margin-right: 1em;
   color: blue;
   user-select: none;
   cursor: pointer;
