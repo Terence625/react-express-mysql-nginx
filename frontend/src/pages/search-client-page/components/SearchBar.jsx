@@ -1,18 +1,20 @@
 import React from "react";
+import "./SearchBar.css"
 
 const SearchBar = ({ receiveData, searchValue, onSearchValueChange }) => {
   return (
-    <form
+    <form 
+      className="SearchBar"
       onSubmit={(e) => {
         e.preventDefault();
-        if (searchValue.replace(/\s/g, "") === "") return;
+        if (!searchValue.replace(/\s/g, "")) return;
         receiveData();
       }}
     >
       <input
         type="text"
         value={searchValue}
-        placeholder="Client name"
+        placeholder="Client name.."
         onChange={(e) => onSearchValueChange(e.target.value)}
       />
       <button type="submit">Search</button>

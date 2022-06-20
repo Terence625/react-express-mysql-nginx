@@ -1,0 +1,10 @@
+.ClientForm label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.ClientForm .errMsg {
+  color: red;
+  text-align: left;
+  font-size: small;
+}

@@ -1,65 +1,108 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./ClientForm.css";
+
+const nameValidation = (name) => {
+  return !name.replace(/\s/g, "")
+    ? "Please fill in Name"
+    : name.length > 15
+    ? "Name cannot be longer than 15 characters"
+    : "\u00A0";
+};
+
+const phoneValidation = (phone) => {
+  return !phone.replace(/\s/g, "")
+    ? "Please fill in Phone"
+    : /\D/.test(phone)
+    ? "Phone can only be numbers"
+    : "\u00A0";
+};
+
+const emailValidation = (email) => {
+  return "\u00A0";
+};
+
+const initialErrorMsg = {
+  name: "\u00A0",
+  phone: "\u00A0",
+  email: "\u00A0",
+};
 
 const ClientForm = ({ formText, onInputChange, submitData }) => {
-  const [blankInput, setBlankInput] = useState([]);
+  const [errorMsg, setErrormsg] = useState(initialErrorMsg);
 
-  const validateData = () => {
-    const mandatoryInput = ["name", "phone"];
-    const blankInput = [];
-    mandatoryInput.forEach((item) => {
-      if (formText[item].replace(/\s/g, "") === "") blankInput.push(item);
+  const mandatoryMark = <span style={{ color: "red" }}>*</span>;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const [nameErrorMsg, phoneErrorMsg, emailErrorMsg] = [
+      nameValidation(formText.name),
+      phoneValidation(formText.phone),
+      emailValidation(formText.email),
+    ];
+    setErrormsg({
+      name: nameErrorMsg,
+      phone: phoneErrorMsg,
+      email: emailErrorMsg,
     });
-    return blankInput;
+    if (
+      !(
+        nameErrorMsg === "\u00A0" &&
+        phoneErrorMsg === "\u00A0" &&
+        emailErrorMsg === "\u00A0"
+      )
+    )
+      return;
+    window.confirm("are you sure?");
+    submitData();
   };
 
   return (
     <div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          const blankInput = validateData();
-          setBlankInput(blankInput);
-          if (blankInput.length !== 0) return;
-          window.confirm("are you sure?");
-          submitData();
-        }}
-      >
+      <form className="ClientForm" onSubmit={handleSubmit}>
         <label>
-          <span style={{ color: "red" }}>*</span>Name:
+          {mandatoryMark}Name:
           <input
             type="text"
             value={formText.name}
+            style={
+              errorMsg.name === "\u00A0" ? null : { "border-color": "red" }
+            }
             onChange={(e) =>
               onInputChange({ ...formText, name: e.target.value })
             }
           />
+          <div className="errMsg">{errorMsg.name}</div>
         </label>
         <label>
-          <span style={{ color: "red" }}>*</span>Phone number:
+          {mandatoryMark}Phone number:
           <input
             type="text"
             value={formText.phone}
+            style={
+              errorMsg.phone === "\u00A0" ? null : { "border-color": "red" }
+            }
             onChange={(e) =>
               onInputChange({ ...formText, phone: e.target.value })
             }
           />
+          <div className="errMsg">{errorMsg.phone}</div>
         </label>
         <label>
           E-mail:
           <input
             type="text"
             value={formText.email}
+            style={
+              errorMsg.email === "\u00A0" ? null : { "border-color": "red" }
+            }
             onChange={(e) =>
               onInputChange({ ...formText, email: e.target.value })
             }
           />
+          <div className="errMsg">{errorMsg.email}</div>
         </label>
-        {!blankInput && <div>cannot be blank</div>}
         <button type="submit">Submit</button>
-        {blankInput.length !== 0 && (
-          <div>{blankInput.toString() + " should not be blank"}</div>
-        )}
       </form>
       <Link to={"/searchClient"}>{"Back to Search"}</Link>
     </div>
