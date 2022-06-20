@@ -57,6 +57,19 @@ const ClientForm = ({ formText, onInputChange, submitData }) => {
     submitData();
   };
 
+  const handleBlur = () => {
+    const [nameErrorMsg, phoneErrorMsg, emailErrorMsg] = [
+      nameValidation(formText.name),
+      phoneValidation(formText.phone),
+      emailValidation(formText.email),
+    ];
+    setErrormsg({
+      name: nameErrorMsg,
+      phone: phoneErrorMsg,
+      email: emailErrorMsg,
+    });
+  }
+
   return (
     <div>
       <form className="ClientForm" onSubmit={handleSubmit}>
@@ -68,6 +81,7 @@ const ClientForm = ({ formText, onInputChange, submitData }) => {
             style={
               errorMsg.name === "\u00A0" ? null : { "border-color": "red" }
             }
+            onBlur={handleBlur}
             onChange={(e) =>
               onInputChange({ ...formText, name: e.target.value })
             }
@@ -82,6 +96,7 @@ const ClientForm = ({ formText, onInputChange, submitData }) => {
             style={
               errorMsg.phone === "\u00A0" ? null : { "border-color": "red" }
             }
+            onBlur={handleBlur}
             onChange={(e) =>
               onInputChange({ ...formText, phone: e.target.value })
             }
@@ -96,6 +111,7 @@ const ClientForm = ({ formText, onInputChange, submitData }) => {
             style={
               errorMsg.email === "\u00A0" ? null : { "border-color": "red" }
             }
+            onBlur={handleBlur}
             onChange={(e) =>
               onInputChange({ ...formText, email: e.target.value })
             }
