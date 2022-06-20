@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Error from "../common/Error";
 import PageLoading from "../common/PageLoading";
-import ClientForm from "../common/ClientForm";
+import PersonForm from "../common/PersonForm";
 import axios from "axios";
 
-const CreateClientPage = () => {
+const CreatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
-  const [clientId, setClientId] = useState("");
+  const [personId, setPersonId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -15,14 +15,14 @@ const CreateClientPage = () => {
     try {
       const result = await axios({
         method: "post",
-        url: "/createClient",
+        url: "/createPerson",
         data: {
           name: formText.name,
           phone: formText.phone,
           email: formText.email,
         },
       });
-      setClientId(result.data.clientId);
+      setPersonId(result.data.personId);
     } catch (error) {
       setIsError(true);
     }
@@ -31,16 +31,16 @@ const CreateClientPage = () => {
 
   return (
     <div>
-      <ClientForm
+      <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
         submitData={submitData}
       />
       {isError && <Error />}
       {isLoading && <PageLoading />}
-      {clientId !== "" && <div>Create successfully: {`${clientId}`}</div>}
+      {personId !== "" && <div>Create successfully: {`${personId}`}</div>}
     </div>
   );
 };
 
-export default CreateClientPage;
+export default CreatePersonPage;

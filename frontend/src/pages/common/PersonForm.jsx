@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./ClientForm.css";
+import "./PersonForm.css";
 
 const nameValidation = (name) => {
   return !name.replace(/\s/g, "")
@@ -28,7 +28,7 @@ const initialErrorMsg = {
   email: "\u00A0",
 };
 
-const ClientForm = ({ formText, onInputChange, submitData }) => {
+const PersonForm = ({ formText, onInputChange, submitData }) => {
   const [errorMsg, setErrormsg] = useState(initialErrorMsg);
 
   const mandatoryMark = <span style={{ color: "red" }}>*</span>;
@@ -72,7 +72,7 @@ const ClientForm = ({ formText, onInputChange, submitData }) => {
 
   return (
     <div>
-      <form className="ClientForm" onSubmit={handleSubmit}>
+      <form className="PersonForm" onSubmit={handleSubmit}>
         <label>
           {mandatoryMark}Name:
           <input
@@ -120,9 +120,9 @@ const ClientForm = ({ formText, onInputChange, submitData }) => {
         </label>
         <button type="submit">Submit</button>
       </form>
-      <Link to={"/searchClient"}>{"Back to Search"}</Link>
+      <Link to={"/searchPerson"}>{"Back to Search"}</Link>
     </div>
   );
 };
 
-export default ClientForm;
+export default PersonForm;

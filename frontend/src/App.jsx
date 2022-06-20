@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-import CreateClientPage from "./pages/create-client-page/CreateClientPage";
-import SearchClientPage from "./pages/search-client-page/SearchClientPage";
-import UpdateClientPage from "./pages/update-client-page/UpdateClientPage";
+import CreatePersonPage from "./pages/create-person-page/CreatePersonPage";
+import SearchPersonPage from "./pages/search-person-page/SearchPersonPage";
+import UpdatePersonPage from "./pages/update-person-page/UpdatePersonPage";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="createClient" element={<CreateClientPage />} />
-        <Route path="searchClient" element={<SearchClientPage />} />
-        <Route path=":clientId" element={<UpdateClientPage />} />
+        <Route path="createPerson" element={<CreatePersonPage />} />
+        <Route path="searchPerson" element={<SearchPersonPage />} />
+        <Route path=":personId" element={<UpdatePersonPage />} />
       </Routes>
     </BrowserRouter>
   );

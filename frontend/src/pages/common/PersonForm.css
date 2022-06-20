@@ -1,9 +1,9 @@
-.ClientForm label {
+.PersonForm label {
   display: block;
   margin-bottom: 1rem;
 }
 
-.ClientForm .errMsg {
+.PersonForm .errMsg {
   color: red;
   text-align: left;
   font-size: small;

@@ -6,12 +6,12 @@ const router = Router();
 router.post("/", async (req, res, next) => {
   const { name, phone, email } = req.body;
   try {
-    const createClientResult = await db.pool
+    const createPersonResult = await db.pool
       .promise()
       .query(
-        `INSERT INTO client_info (name, phone, email) VALUES ("${name}", "${phone}", "${email}")`,
+        `INSERT INTO person_info (name, phone, email) VALUES ("${name}", "${phone}", "${email}")`,
       );
-    res.status(200).send({ clientId: createClientResult[0].insertId });
+    res.status(200).send({ personId: createPersonResult[0].insertId });
   } catch (err) {
     next(err);
   }

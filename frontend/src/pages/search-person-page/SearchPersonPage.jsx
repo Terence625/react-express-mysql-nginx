@@ -6,7 +6,7 @@ import SearchBar from "./components/SearchBar";
 import ResultList from "./components/ResultList";
 import { Link } from "react-router-dom";
 
-const SearchClientPage = () => {
+const SearchPersonPage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,9 +18,9 @@ const SearchClientPage = () => {
     try {
       const result = await axios({
         method: "get",
-        url: `/searchClient?name=${searchValue}`,
+        url: `/searchPerson?name=${searchValue}`,
       });
-      setSearchResult(result.data.clientList)
+      setSearchResult(result.data.personList)
     } catch (error) {
       setIsError(true);
     }
@@ -35,7 +35,7 @@ const SearchClientPage = () => {
         searchValue={searchValue}
         onSearchValueChange={(value) => setSearchValue(value)}
       />
-      <Link to={"/createClient"}>Create New Client</Link>
+      <Link to={"/createPerson"}>Create New Person</Link>
       {isError && <Error />}
       {isLoading && <PageLoading />}
       {searchResult.length !== 0 && (
@@ -49,4 +49,4 @@ const SearchClientPage = () => {
   );
 };
 
-export default SearchClientPage;
+export default SearchPersonPage;

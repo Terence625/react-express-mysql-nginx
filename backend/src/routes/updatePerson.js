@@ -4,9 +4,9 @@ const db = require("../database");
 const router = Router();
 
 router.put("/:id", async (req, res, next) => {
-  const clientId = req.params.id;
+  const personId = req.params.id;
   const { name, phone, email } = req.body;
-  const sql = `UPDATE client_info SET name = "${name}", phone = "${phone}", email = "${email}" WHERE client_id = "${clientId}"`;
+  const sql = `UPDATE person_info SET name = "${name}", phone = "${phone}", email = "${email}" WHERE person_id = "${personId}"`;
   try {
     await db.pool.promise().query(sql);
     res.sendStatus(200);

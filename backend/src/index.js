@@ -4,9 +4,9 @@ const session = require("express-session");
 const passport = require("passport");
 const local = require("./strategies/local");
 const authRoute = require("./routes/auth");
-const createClinetRoute = require("./routes/createClient");
-const searchClientRoute = require("./routes/searchClient");
-const updateClientRoute = require("./routes/updateClient");
+const createClinetRoute = require("./routes/createPerson");
+const searchPersonRoute = require("./routes/searchPerson");
+const updatePersonRoute = require("./routes/updatePerson");
 const db = require("./database");
 const store = new session.MemoryStore();
 
@@ -34,16 +34,16 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/auth", authRoute);
-app.use("/createClient", createClinetRoute);
-app.use("/searchClient", searchClientRoute);
-app.use("/updateClient", updateClientRoute);
+app.use("/createPerson", createClinetRoute);
+app.use("/searchPerson", searchPersonRoute);
+app.use("/updatePerson", updatePersonRoute);
 app.get("/:id", async (req, res, next) => {
-  const clientId = req.params.id;
+  const personId = req.params.id;
   try {
-    const searchClientResult = await db.pool
+    const searchPersonResult = await db.pool
       .promise()
-      .query("SELECT * FROM client_info WHERE client_id = ?", [clientId]);
-    res.status(200).json({ clientInfo: searchClientResult[0] });
+      .query("SELECT * FROM person_info WHERE person_id = ?", [personId]);
+    res.status(200).json({ personInfo: searchPersonResult[0] });
   } catch (err) {
     next(err);
   }

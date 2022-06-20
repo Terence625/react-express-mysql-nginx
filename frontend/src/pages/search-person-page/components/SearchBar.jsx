@@ -14,7 +14,7 @@ const SearchBar = ({ receiveData, searchValue, onSearchValueChange }) => {
       <input
         type="text"
         value={searchValue}
-        placeholder="Client name.."
+        placeholder="Person name.."
         onChange={(e) => onSearchValueChange(e.target.value)}
       />
       <button type="submit">Search</button>

@@ -13,12 +13,12 @@ let pool = mysql.createPool({
 });
 
 async function init() {
-  const createClientTable =
-    "CREATE TABLE IF NOT EXISTS client_info (client_id int NOT NULL AUTO_INCREMENT, name varchar(255), phone varchar(255), email varchar(255), PRIMARY KEY (client_id))";
+  const createPersonTable =
+    "CREATE TABLE IF NOT EXISTS person_info (person_id int NOT NULL AUTO_INCREMENT, name varchar(255), phone varchar(255), email varchar(255), PRIMARY KEY (person_id))";
   const createAdminTable =
     "CREATE TABLE IF NOT EXISTS user_account (id varchar(36), username varchar(255), password varchar(255))";
   await Promise.all([
-    pool.promise().query(createClientTable),
+    pool.promise().query(createPersonTable),
     pool.promise().query(createAdminTable),
   ]);
   console.log(`Connected to mysql db at host ${HOST}`);
