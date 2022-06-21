@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Error from "../common/Error";
-import PageLoading from "../common/PageLoading";
 import PersonForm from "../common/PersonForm";
 import axios from "axios";
+import PageContainer from "../common/PageContainer";
 
 const CreatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
@@ -30,16 +30,15 @@ const CreatePersonPage = () => {
   };
 
   return (
-    <div>
+    <PageContainer isLoading={isLoading}>
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
         submitData={submitData}
       />
       {isError && <Error />}
-      {isLoading && <PageLoading />}
       {personId !== "" && <div>Create successfully: {`${personId}`}</div>}
-    </div>
+    </PageContainer>
   );
 };
 

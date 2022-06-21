@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Error from "../common/Error";
-import PageLoading from "../common/PageLoading";
 import PersonForm from "../common/PersonForm";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import PageContainer from "../common/PageContainer";
 
 const UpdatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
@@ -55,16 +55,15 @@ const UpdatePersonPage = () => {
   };
 
   return (
-    <div>
+    <PageContainer isLoading={isLoading}>
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
         submitData={submitData}
       />
       {isError && <Error />}
-      {isLoading && <PageLoading />}
       {isUpdated && <div>Update successfully</div>}
-    </div>
+    </PageContainer>
   );
 };
 

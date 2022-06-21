@@ -1,6 +1,6 @@
 import axios from "axios";
 import Error from "../common/Error";
-import PageLoading from "../common/PageLoading";
+import PageContainer from "../common/PageContainer";
 import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import ResultList from "./components/ResultList";
@@ -29,7 +29,7 @@ const SearchPersonPage = () => {
   };
 
   return (
-    <div>
+    <PageContainer isLoading={isLoading}>
       <SearchBar
         receiveData={receiveData}
         searchValue={searchValue}
@@ -37,7 +37,6 @@ const SearchPersonPage = () => {
       />
       <Link to={"/createPerson"}>Create New Person</Link>
       {isError && <Error />}
-      {isLoading && <PageLoading />}
       {searchResult.length !== 0 && (
         <ResultList
           searchResult={searchResult}
@@ -45,7 +44,7 @@ const SearchPersonPage = () => {
           onSelectPage={(value) => setCurrentPage(value)}
         />
       )}
-    </div>
+    </PageContainer>
   );
 };
 
