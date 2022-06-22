@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Error from "../common/Error";
 import PersonForm from "../common/PersonForm";
 import axios from "axios";
 import PageContainer from "../common/PageContainer";
@@ -12,6 +11,7 @@ const CreatePersonPage = () => {
 
   const submitData = async () => {
     setIsLoading(true);
+    setIsError(false);
     try {
       const result = await axios({
         method: "post",
@@ -30,13 +30,12 @@ const CreatePersonPage = () => {
   };
 
   return (
-    <PageContainer isLoading={isLoading}>
+    <PageContainer isLoading={isLoading} isError={isError}>
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
         submitData={submitData}
       />
-      {isError && <Error />}
       {personId !== "" && <div>Create successfully: {`${personId}`}</div>}
     </PageContainer>
   );

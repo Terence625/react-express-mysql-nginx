@@ -16,7 +16,6 @@ const ResultList = ({ searchResult, currentPage, onSelectPage }) => {
     <div>
       <ul className="ResultList">
         {pageLists.map((item) => {
-          console.log(item.person_id);
           return (
             <li key={item.person_id}>
               <Link to={"/" + item.person_id.toString()}>{item.name}</Link>

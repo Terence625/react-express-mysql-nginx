@@ -1,7 +1,7 @@
 import React from "react";
 import "./PageContainer.css";
 
-const PageContainer = ({ children, isLoading = false }) => {
+const PageContainer = ({ children, isLoading = false, isError = false }) => {
 
   return (
     <div>
@@ -10,7 +10,8 @@ const PageContainer = ({ children, isLoading = false }) => {
         style={isLoading ? { display: "block" } : null}
       ></div>
       {isLoading && <div className="loader"></div>}
-      {children}
+      {isError && <div className="errorToast">oops, something went wrong!</div>}
+      <div className="pageContent">{children}</div>
     </div>
   );
 };

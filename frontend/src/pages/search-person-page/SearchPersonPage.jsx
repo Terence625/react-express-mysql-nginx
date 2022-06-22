@@ -1,5 +1,4 @@
 import axios from "axios";
-import Error from "../common/Error";
 import PageContainer from "../common/PageContainer";
 import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
@@ -15,6 +14,7 @@ const SearchPersonPage = () => {
 
   const receiveData = async () => {
     setIsLoading(true);
+    setIsError(false);
     try {
       const result = await axios({
         method: "get",
@@ -29,14 +29,13 @@ const SearchPersonPage = () => {
   };
 
   return (
-    <PageContainer isLoading={isLoading}>
+    <PageContainer isLoading={isLoading} isError={isError}>
       <SearchBar
         receiveData={receiveData}
         searchValue={searchValue}
         onSearchValueChange={(value) => setSearchValue(value)}
       />
       <Link to={"/createPerson"}>Create New Person</Link>
-      {isError && <Error />}
       {searchResult.length !== 0 && (
         <ResultList
           searchResult={searchResult}

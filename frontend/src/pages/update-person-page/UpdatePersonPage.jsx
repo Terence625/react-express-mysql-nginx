@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Error from "../common/Error";
 import PersonForm from "../common/PersonForm";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -55,13 +54,12 @@ const UpdatePersonPage = () => {
   };
 
   return (
-    <PageContainer isLoading={isLoading}>
+    <PageContainer isLoading={isLoading} isError={isError}>
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
         submitData={submitData}
       />
-      {isError && <Error />}
       {isUpdated && <div>Update successfully</div>}
     </PageContainer>
   );
