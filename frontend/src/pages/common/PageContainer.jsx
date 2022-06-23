@@ -1,5 +1,4 @@
 import React from "react";
-import ConfirmDialog from "./ConfirmDialog";
 import "./PageContainer.css";
 
 const PageContainer = ({
@@ -16,7 +15,6 @@ const PageContainer = ({
       ></div>
       {isLoading && <div className="loader"></div>}
       {isError && <div className="errorToast">oops, something went wrong!</div>}
-      {isWaitingForSubmit && <ConfirmDialog />}
       <div className="pageContent">{children}</div>
     </div>
   );

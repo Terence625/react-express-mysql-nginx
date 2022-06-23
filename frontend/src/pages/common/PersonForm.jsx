@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ConfirmDialog from "./ConfirmDialog";
 import "./PersonForm.css";
 
 const nameValidation = (name) => {
@@ -30,6 +31,7 @@ const initialErrorMsg = {
 
 const PersonForm = ({ formText, onInputChange, submitData }) => {
   const [errorMsg, setErrormsg] = useState(initialErrorMsg);
+  const [waitingForConfirm, setWaitingForConfirm] = useState(false);
 
   const mandatoryMark = <span style={{ color: "red" }}>*</span>;
 
@@ -53,8 +55,16 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
       )
     )
       return;
-    window.confirm("are you sure?");
+    setWaitingForConfirm(true);
+  };
+
+  const handleConfirm = () => {
+    setWaitingForConfirm(false);
     submitData();
+  };
+
+  const handleCancel = () => {
+    setWaitingForConfirm(false);
   };
 
   const handleBlur = () => {
@@ -68,7 +78,7 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
       phone: phoneErrorMsg,
       email: emailErrorMsg,
     });
-  }
+  };
 
   return (
     <div>
@@ -79,7 +89,7 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
             type="text"
             value={formText.name}
             style={
-              errorMsg.name === "\u00A0" ? null : { "border-color": "red" }
+              errorMsg.name === "\u00A0" ? null : { "borderColor": "red" }
             }
             onBlur={handleBlur}
             onChange={(e) =>
@@ -94,7 +104,7 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
             type="text"
             value={formText.phone}
             style={
-              errorMsg.phone === "\u00A0" ? null : { "border-color": "red" }
+              errorMsg.phone === "\u00A0" ? null : { "borderColor": "red" }
             }
             onBlur={handleBlur}
             onChange={(e) =>
@@ -109,7 +119,7 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
             type="text"
             value={formText.email}
             style={
-              errorMsg.email === "\u00A0" ? null : { "border-color": "red" }
+              errorMsg.email === "\u00A0" ? null : { "borderColor": "red" }
             }
             onBlur={handleBlur}
             onChange={(e) =>
@@ -121,6 +131,16 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
         <button type="submit">Submit</button>
       </form>
       <Link to={"/searchPerson"}>{"Back to Search"}</Link>
+      {waitingForConfirm && (
+        <ConfirmDialog
+          handleConfirm={handleConfirm}
+          handleCancel={handleCancel}
+        />
+      )}
+      <div
+        className="greyCover"
+        style={waitingForConfirm ? { display: "block" } : null}
+      ></div>
     </div>
   );
 };
