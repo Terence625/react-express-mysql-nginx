@@ -1,8 +1,13 @@
 import React from "react";
+import ConfirmDialog from "./ConfirmDialog";
 import "./PageContainer.css";
 
-const PageContainer = ({ children, isLoading = false, isError = false }) => {
-
+const PageContainer = ({
+  children,
+  isLoading = false,
+  isError = false,
+  isWaitingForSubmit = false,
+}) => {
   return (
     <div>
       <div
@@ -11,6 +16,7 @@ const PageContainer = ({ children, isLoading = false, isError = false }) => {
       ></div>
       {isLoading && <div className="loader"></div>}
       {isError && <div className="errorToast">oops, something went wrong!</div>}
+      {isWaitingForSubmit && <ConfirmDialog />}
       <div className="pageContent">{children}</div>
     </div>
   );

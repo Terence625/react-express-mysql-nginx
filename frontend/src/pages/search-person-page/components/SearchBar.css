@@ -1,3 +1,28 @@
 .SearchBar input {
   margin-bottom: 2rem;
 }
+
+.SearchBar input {
+  display: block;
+  width: 20rem;
+  height: 2rem;
+  padding: 0.5rem;
+  font-size: 1.1em;
+  font-weight: 500;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.SearchBar button {
+  border: none;
+  padding: 1rem;
+  width: 21.2rem;
+  font-size: 1.2em;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.SearchBar button:hover {
+  background-color: #c5c5c5;
+}

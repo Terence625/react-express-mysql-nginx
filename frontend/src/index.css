@@ -7,32 +7,6 @@ body {
   text-align: center;
 }
 
-input {
-  display: block;
-  width: 20rem;
-  height: 2rem;
-  padding: 0.5rem;
-  font-size: 1.1em;
-  font-weight: 500;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-}
-button {
-  border: none;
-  padding: 1rem;
-  width: 21.2rem;
-  font-size: 1.2em;
-  border-radius: 0.2rem;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #c5c5c5;
-}
-
-form {
-  margin-bottom: 1rem;
-}
-
 a:link {
   text-decoration: none;
 }

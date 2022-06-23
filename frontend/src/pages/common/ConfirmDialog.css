@@ -1,0 +1,33 @@
+.ConfirmDialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  display: block;
+  background-color: white;
+  width: 240px;
+  height:100px;
+  margin-top: -50px;
+  margin-left: -120px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.ConfirmDialog .buttonGroup {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.ConfirmDialog button {
+  display: block;
+  background-color: white;
+  border: 2px solid white;
+  width:80px;
+  height:30px;
+  cursor: pointer;
+}
+
+.ConfirmDialog button:hover {
+  background-color: #f1eeee;
+
+}
