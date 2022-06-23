@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PersonForm from "../common/PersonForm";
 import axios from "axios";
 import PageContainer from "../common/PageContainer";
+import ConfirmDialog from "../common/ConfirmDialog";
+import { useLinkClickHandler } from "react-router-dom";
 
 const CreatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
@@ -29,6 +31,13 @@ const CreatePersonPage = () => {
     setIsLoading(false);
   };
 
+  const handleContinue = () => {
+    setFormText({ name: "", phone: "", email: "" });
+    setPersonId("")
+  };
+
+  const handleBack = useLinkClickHandler("/searchPerson");
+
   return (
     <PageContainer isLoading={isLoading} isError={isError}>
       <PersonForm
@@ -36,7 +45,15 @@ const CreatePersonPage = () => {
         onInputChange={(value) => setFormText(value)}
         submitData={submitData}
       />
-      {personId !== "" && <div>Create successfully: {`${personId}`}</div>}
+      {personId !== "" && (
+        <ConfirmDialog
+          text={"Create successfully, client id: " + personId}
+          confirmButtonText="Continue to create"
+          cancelButtonText="Back to search"
+          handleConfirm={handleContinue}
+          handleCancel={handleBack}
+        />
+      )}
     </PageContainer>
   );
 };

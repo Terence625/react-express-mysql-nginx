@@ -134,10 +134,6 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
           handleCancel={handleCancel}
         />
       )}
-      <div
-        className="greyCover"
-        style={waitingForConfirm ? { display: "block" } : null}
-      ></div>
     </div>
   );
 };
