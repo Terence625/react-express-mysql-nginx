@@ -20,7 +20,7 @@ const SearchPersonPage = () => {
         method: "get",
         url: `/searchPerson?name=${searchValue}`,
       });
-      setSearchResult(result.data.personList)
+      setSearchResult(result.data.personList);
     } catch (error) {
       setIsError(true);
     }
@@ -36,13 +36,11 @@ const SearchPersonPage = () => {
         onSearchValueChange={(value) => setSearchValue(value)}
       />
       <Link to={"/createPerson"}>Create New Person</Link>
-      {searchResult.length !== 0 && (
-        <ResultList
-          searchResult={searchResult}
-          currentPage={currentPage}
-          onSelectPage={(value) => setCurrentPage(value)}
-        />
-      )}
+      <ResultList
+        searchResult={searchResult}
+        currentPage={currentPage}
+        onSelectPage={(value) => setCurrentPage(value)}
+      />
     </PageContainer>
   );
 };

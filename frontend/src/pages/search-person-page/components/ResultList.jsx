@@ -12,6 +12,13 @@ const ResultList = ({ searchResult, currentPage, onSelectPage }) => {
   );
   const totalPageNumber = Math.ceil(searchResult.length / listsPerPage);
 
+  if (searchResult.length === 0)
+    return (
+      <div style={{ marginTop: "16px" }}>
+        No result, please create new person
+      </div>
+    );
+
   return (
     <div>
       <ul className="ResultList">
