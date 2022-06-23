@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const SearchPersonPage = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -20,7 +20,7 @@ const SearchPersonPage = () => {
         method: "get",
         url: `/searchPerson?name=${searchValue}`,
       });
-      setSearchResult(result.data.personList);
+      setSearchResult(result.data.personList)
     } catch (error) {
       setIsError(true);
     }
@@ -36,11 +36,13 @@ const SearchPersonPage = () => {
         onSearchValueChange={(value) => setSearchValue(value)}
       />
       <Link to={"/createPerson"}>Create New Person</Link>
-      <ResultList
-        searchResult={searchResult}
-        currentPage={currentPage}
-        onSelectPage={(value) => setCurrentPage(value)}
-      />
+      {searchResult && (
+        <ResultList
+          searchResult={searchResult}
+          currentPage={currentPage}
+          onSelectPage={(value) => setCurrentPage(value)}
+        />
+      )}
     </PageContainer>
   );
 };
