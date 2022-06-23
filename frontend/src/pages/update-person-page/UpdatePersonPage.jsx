@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import PersonForm from "../common/PersonForm";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import ConfirmDialog from "../common/ConfirmDialog";
+import { useLinkClickHandler } from "react-router-dom";
 import PageContainer from "../common/PageContainer";
 
 const UpdatePersonPage = () => {
@@ -53,6 +55,12 @@ const UpdatePersonPage = () => {
     setIsLoading(false);
   };
 
+  const handleContinue = () => {
+    setIsUpdated(false)
+  };
+
+  const handleBack = useLinkClickHandler("/searchPerson");
+
   return (
     <PageContainer isLoading={isLoading} isError={isError}>
       <PersonForm
@@ -60,7 +68,15 @@ const UpdatePersonPage = () => {
         onInputChange={(value) => setFormText(value)}
         submitData={submitData}
       />
-      {isUpdated && <div>Update successfully</div>}
+      {isUpdated && (
+        <ConfirmDialog
+          text="Update successfully"
+          confirmButtonText="Continue to update"
+          cancelButtonText="Back to search"
+          handleConfirm={handleContinue}
+          handleCancel={handleBack}
+        />
+      )}
     </PageContainer>
   );
 };
