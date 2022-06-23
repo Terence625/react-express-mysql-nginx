@@ -88,9 +88,7 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
           <input
             type="text"
             value={formText.name}
-            style={
-              errorMsg.name === "\u00A0" ? null : { "borderColor": "red" }
-            }
+            style={errorMsg.name === "\u00A0" ? null : { borderColor: "red" }}
             onBlur={handleBlur}
             onChange={(e) =>
               onInputChange({ ...formText, name: e.target.value })
@@ -103,9 +101,7 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
           <input
             type="text"
             value={formText.phone}
-            style={
-              errorMsg.phone === "\u00A0" ? null : { "borderColor": "red" }
-            }
+            style={errorMsg.phone === "\u00A0" ? null : { borderColor: "red" }}
             onBlur={handleBlur}
             onChange={(e) =>
               onInputChange({ ...formText, phone: e.target.value })
@@ -118,9 +114,7 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
           <input
             type="text"
             value={formText.email}
-            style={
-              errorMsg.email === "\u00A0" ? null : { "borderColor": "red" }
-            }
+            style={errorMsg.email === "\u00A0" ? null : { borderColor: "red" }}
             onBlur={handleBlur}
             onChange={(e) =>
               onInputChange({ ...formText, email: e.target.value })
@@ -133,6 +127,9 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
       <Link to={"/searchPerson"}>{"Back to Search"}</Link>
       {waitingForConfirm && (
         <ConfirmDialog
+          text="Are you sure to submit"
+          confirmButtonText="Confirm"
+          cancelButtonText="Cancel"
           handleConfirm={handleConfirm}
           handleCancel={handleCancel}
         />

@@ -1,13 +1,13 @@
 import React from "react";
 import "./ConfirmDialog.css";
 
-const ConfirmDialog = ({handleConfirm, handleCancel}) => {
+const ConfirmDialog = ({text,confirmButtonText, cancelButtonText, handleConfirm, handleCancel}) => {
   return (
     <div className="ConfirmDialog">
-      <p>Are you sure to submit</p>
+      <p>{text}</p>``
       <div className="buttonGroup">
-        <button onClick={handleConfirm}>Confirm</button>
-        <button onClick={handleCancel}>Cancel</button>
+        <button onClick={handleConfirm}>{confirmButtonText}</button>
+        <button onClick={handleCancel}>{cancelButtonText}</button>
       </div>
     </div>
   );
