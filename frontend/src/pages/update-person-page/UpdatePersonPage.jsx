@@ -11,6 +11,7 @@ const UpdatePersonPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
+  const [isPersonNotExist, setIsPersonNotExist] = useState(false);
   const { personId } = useParams();
 
   useEffect(() => {
@@ -23,6 +24,10 @@ const UpdatePersonPage = () => {
           url: "/" + personId,
         });
         const personInfo = result.data.personInfo[0];
+        if (personInfo === undefined) {
+          setIsPersonNotExist(true);
+          return;
+        }
         setFormText({
           name: personInfo.name,
           phone: personInfo.phone,
@@ -56,12 +61,14 @@ const UpdatePersonPage = () => {
   };
 
   const handleContinue = () => {
-    setIsUpdated(false)
+    setIsUpdated(false);
   };
 
   const handleBack = useLinkClickHandler("/searchPerson");
 
-  return (
+  return isPersonNotExist ? (
+    <div>Person not exist</div>
+  ) : (
     <PageContainer isLoading={isLoading} isError={isError}>
       <PersonForm
         formText={formText}
