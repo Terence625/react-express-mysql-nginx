@@ -43,6 +43,7 @@ const UpdatePersonPage = () => {
 
   const submitData = async () => {
     setIsLoading(true);
+    setIsError(false);
     try {
       await axios({
         method: "put",
