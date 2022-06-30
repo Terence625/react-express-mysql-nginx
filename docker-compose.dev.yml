@@ -10,7 +10,7 @@ services:
       - ./frontend/src:/app/src:ro
       - front-notused:/app/node_modules
     environment:
-      - NODE_ENV=development
+      - REACT_APP_BACKEND_PORT=3001
 
   backend:
     build:
@@ -26,6 +26,7 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
       - MYSQL_DB=db
+      - PORT=3001
     depends_on:
       - mysql
 
