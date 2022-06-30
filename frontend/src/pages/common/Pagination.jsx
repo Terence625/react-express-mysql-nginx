@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Pagination.css";
 
 const range = (from, to, step = 1) => {
