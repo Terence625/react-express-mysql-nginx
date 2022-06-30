@@ -5,4 +5,4 @@ RUN npm install
 COPY . .
 ENV PORT 3001
 EXPOSE $PORT
-CMD ["node", "index.js"]
+CMD ["npm", "start"]
