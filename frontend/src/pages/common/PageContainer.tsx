@@ -2,7 +2,7 @@ import React from "react";
 import "./PageContainer.css";
 
 interface IPageContainerProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isLoading: boolean;
   isError: boolean;
 }

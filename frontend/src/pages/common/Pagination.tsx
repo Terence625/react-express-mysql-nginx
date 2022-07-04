@@ -1,20 +1,27 @@
 import React from "react";
 import "./Pagination.css";
 
-const range = (from, to, step = 1) => {
+const range = (from: number, to: number, step = 1) => {
   const range = [];
   for (let i = from; i <= to; i += step) range.push(i);
   return range;
 };
+
+interface IPaginationProps {
+  pageNeighbours: number;
+  totalPageNumber: number;
+  onSelectPage: (value: number) => void;
+  currentPage: number;
+}
 
 const Pagination = ({
   pageNeighbours,
   totalPageNumber,
   onSelectPage,
   currentPage,
-}) => {
+}: IPaginationProps) => {
   const totalPageBlocks = pageNeighbours * 2 + 5;
-  let pageNumberDisplay;
+  let pageNumberDisplay: (number | string)[] = [];
 
   const leftBound = currentPage - pageNeighbours;
   const rightBound = currentPage + pageNeighbours;
@@ -41,10 +48,12 @@ const Pagination = ({
       ];
   } else pageNumberDisplay = range(1, totalPageNumber);
 
-  const handleEllipsisClick = (ellipsis) => {
-    if (ellipsis === "leftEllipsis")
-      onSelectPage(pageNumberDisplay.at(2) - pageNeighbours - 1);
-    else onSelectPage(pageNumberDisplay.at(-3) + pageNeighbours + 1);
+  const handleEllipsisClick = (ellipsis: string) => {
+    if (ellipsis === "leftEllipsis") {
+      onSelectPage(leftBound - pageNeighbours - 1);
+    } else {
+      onSelectPage(rightBound + pageNeighbours + 1);
+    }
   };
 
   return (
@@ -69,11 +78,13 @@ const Pagination = ({
             key={stringItem}
             id={stringItem}
             style={
-              stringItem === currentPage.toString() ? { color: "black" } : null
+              stringItem === currentPage.toString()
+                ? { color: "black" }
+                : undefined
             }
             onClick={(e) => {
               e.preventDefault();
-              onSelectPage(parseInt(e.target.id));
+              onSelectPage(parseInt((e.target as Element).id));
             }}
           >
             {stringItem}
