@@ -1,7 +1,17 @@
 import React from "react";
 import "./PageContainer.css";
 
-const PageContainer = ({ children, isLoading = false, isError = false }) => {
+interface IPageContainerProps {
+  children: React.ReactNode;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+const PageContainer = ({
+  children,
+  isLoading = false,
+  isError = false,
+}: IPageContainerProps) => {
   return (
     <React.Fragment>
       {isLoading && (
