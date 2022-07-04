@@ -3,7 +3,20 @@ import Pagination from "../../common/Pagination";
 import "./ResultList.css";
 import { Link } from "react-router-dom";
 
-const ResultList = ({ searchResult, currentPage, onSelectPage }) => {
+interface IResultListProps {
+  searchResult: {
+    person_id: number;
+    name: string;
+  }[];
+  currentPage: number;
+  onSelectPage: (value: number) => void;
+}
+
+const ResultList = ({
+  searchResult,
+  currentPage,
+  onSelectPage,
+}: IResultListProps) => {
   const listsPerPage = 3;
   const reversedSearchResult = searchResult.slice(0).reverse();
   const pageLists = reversedSearchResult.slice(

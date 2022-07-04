@@ -1,9 +1,19 @@
 import React from "react";
-import "./SearchBar.css"
+import "./SearchBar.css";
 
-const SearchBar = ({ receiveData, searchValue, onSearchValueChange }) => {
+interface ISearchBarProps {
+  receiveData: () => void;
+  searchValue: string;
+  onSearchValueChange: (vaue: string) => void;
+}
+
+const SearchBar = ({
+  receiveData,
+  searchValue,
+  onSearchValueChange,
+}: ISearchBarProps) => {
   return (
-    <form 
+    <form
       className="SearchBar"
       onSubmit={(e) => {
         e.preventDefault();

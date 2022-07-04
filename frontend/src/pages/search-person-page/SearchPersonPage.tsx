@@ -20,7 +20,7 @@ const SearchPersonPage = () => {
         method: "get",
         url: `/searchPerson?name=${searchValue}`,
       });
-      setSearchResult(result.data.personList)
+      setSearchResult(result.data.personList);
     } catch (error) {
       setIsError(true);
     }
