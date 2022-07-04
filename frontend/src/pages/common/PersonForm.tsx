@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ConfirmDialog from "./ConfirmDialog";
 import "./PersonForm.css";
 
-const nameValidation = (name) => {
+const nameValidation = (name: string) => {
   return !name.replace(/\s/g, "")
     ? "Please fill in Name"
     : name.length > 15
@@ -11,7 +11,7 @@ const nameValidation = (name) => {
     : "\u00A0";
 };
 
-const phoneValidation = (phone) => {
+const phoneValidation = (phone: string) => {
   return !phone.replace(/\s/g, "")
     ? "Please fill in Phone"
     : /\D/.test(phone)
@@ -19,7 +19,7 @@ const phoneValidation = (phone) => {
     : "\u00A0";
 };
 
-const emailValidation = (email) => {
+const emailValidation = (email: string) => {
   return "\u00A0";
 };
 
@@ -29,13 +29,29 @@ const initialErrorMsg = {
   email: "\u00A0",
 };
 
-const PersonForm = ({ formText, onInputChange, submitData }) => {
+interface Input {
+  name: string;
+  phone: string;
+  email: string;
+}
+
+interface IPersonFormProps {
+  formText: Input;
+  onInputChange: (input: Input) => void;
+  submitData: () => void;
+}
+
+const PersonForm = ({
+  formText,
+  onInputChange,
+  submitData,
+}: IPersonFormProps) => {
   const [errorMsg, setErrormsg] = useState(initialErrorMsg);
   const [waitingForConfirm, setWaitingForConfirm] = useState(false);
 
   const mandatoryMark = <span style={{ color: "red" }}>*</span>;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     const [nameErrorMsg, phoneErrorMsg, emailErrorMsg] = [
       nameValidation(formText.name),
@@ -88,7 +104,9 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
           <input
             type="text"
             value={formText.name}
-            style={errorMsg.name === "\u00A0" ? null : { borderColor: "red" }}
+            style={
+              errorMsg.name === "\u00A0" ? undefined : { borderColor: "red" }
+            }
             onBlur={handleBlur}
             onChange={(e) =>
               onInputChange({ ...formText, name: e.target.value })
@@ -101,7 +119,9 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
           <input
             type="text"
             value={formText.phone}
-            style={errorMsg.phone === "\u00A0" ? null : { borderColor: "red" }}
+            style={
+              errorMsg.phone === "\u00A0" ? undefined : { borderColor: "red" }
+            }
             onBlur={handleBlur}
             onChange={(e) =>
               onInputChange({ ...formText, phone: e.target.value })
@@ -114,7 +134,9 @@ const PersonForm = ({ formText, onInputChange, submitData }) => {
           <input
             type="text"
             value={formText.email}
-            style={errorMsg.email === "\u00A0" ? null : { borderColor: "red" }}
+            style={
+              errorMsg.email === "\u00A0" ? undefined : { borderColor: "red" }
+            }
             onBlur={handleBlur}
             onChange={(e) =>
               onInputChange({ ...formText, email: e.target.value })
