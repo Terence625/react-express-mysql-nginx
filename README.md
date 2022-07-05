@@ -56,6 +56,8 @@ system error: <img width="200" alt="f4889dee5f870e1a79f888d9e50a0bd" src="https:
 
 ## What's next
 
-1. TypeScript
+1. ~~TypeScript~~ (Done)
+
 2. Unit test (jest)
+
 3. Deploy to google cloug server with Jenkins
