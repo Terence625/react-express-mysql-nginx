@@ -1,0 +1,41 @@
+.Table table{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  max-width: 500px;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.Table th, td {
+  position: relative;
+  border: 1px solid black;
+  text-align: left;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+.Table .dataCell {
+  width: 160px;
+  height: 20px
+}
+
+.Table .inputCell {
+  position: absolute;
+  display: inline-block;
+  width: 160px;
+  height: 20px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.Table input {
+  width: 95%;
+  box-sizing: border-box;
+  border-style: hidden; 
+}
+
+.Table input:focus {
+  outline: none; 
+}
