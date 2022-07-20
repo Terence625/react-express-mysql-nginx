@@ -3,7 +3,7 @@ import PersonForm from "../common/PersonForm";
 import axios from "axios";
 import PageContainer from "../common/PageContainer";
 import ConfirmDialog from "../common/ConfirmDialog";
-import { useLinkClickHandler } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 
 const CreatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
@@ -31,12 +31,14 @@ const CreatePersonPage = () => {
     setIsLoading(false);
   };
 
+  let navigate = useNavigate();
+
   const handleContinue = () => {
     setFormText({ name: "", phone: "", email: "" });
     setPersonId("")
   };
 
-  const handleBack = useLinkClickHandler("/searchPerson");
+  const handleBack = () => navigate("/searchPerson");
 
   return (
     <PageContainer isLoading={isLoading} isError={isError}>

@@ -3,7 +3,7 @@ import PersonForm from "../common/PersonForm";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ConfirmDialog from "../common/ConfirmDialog";
-import { useLinkClickHandler } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PageContainer from "../common/PageContainer";
 
 const UpdatePersonPage = () => {
@@ -65,7 +65,9 @@ const UpdatePersonPage = () => {
     setIsUpdated(false);
   };
 
-  const handleBack = useLinkClickHandler("/searchPerson");
+  let navigate = useNavigate();
+
+  const handleBack = () => navigate("/searchPerson");
 
   return isPersonNotExist ? (
     <div>Person not exist</div>

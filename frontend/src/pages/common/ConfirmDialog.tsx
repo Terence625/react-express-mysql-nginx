@@ -7,7 +7,7 @@ interface IConfirmDialog {
   cancelButtonText: string;
   handleConfirm: () => void;
   handleCancel: (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
 }
 
@@ -24,8 +24,8 @@ const ConfirmDialog = ({
       <div className="ConfirmDialog">
         <p>{text}</p>
         <div className="buttonGroup">
-          <button onClick={() => handleConfirm}>{confirmButtonText}</button>
-          <button onClick={() => handleCancel}>{cancelButtonText}</button>
+          <button onClick={() => handleConfirm()}>{confirmButtonText}</button>
+          <button onClick={(e) => handleCancel(e)}>{cancelButtonText}</button>
         </div>
       </div>
     </React.Fragment>
