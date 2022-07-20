@@ -1,41 +1,26 @@
 import React, { useState } from "react";
 import PersonForm from "../common/PersonForm";
-import axios from "axios";
 import PageContainer from "../common/PageContainer";
 import ConfirmDialog from "../common/ConfirmDialog";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useRequest from "../hooks/useRequest";
 
 const CreatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
-  const [personId, setPersonId] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
-  const submitData = async () => {
-    setIsLoading(true);
-    setIsError(false);
-    try {
-      const result = await axios({
-        method: "post",
-        url: "/createPerson",
-        data: {
-          name: formText.name,
-          phone: formText.phone,
-          email: formText.email,
-        },
-      });
-      setPersonId(result.data.personId);
-    } catch (error) {
-      setIsError(true);
-    }
-    setIsLoading(false);
-  };
+  const { isError, isLoading, request, response, setResponse } = useRequest<
+    typeof formText,
+    { personId: string }
+  >({
+    method: "post",
+    url: "/createPerson",
+    requestBody: formText,
+  });
 
   let navigate = useNavigate();
 
   const handleContinue = () => {
     setFormText({ name: "", phone: "", email: "" });
-    setPersonId("")
+    setResponse({ personId: "" });
   };
 
   const handleBack = () => navigate("/searchPerson");
@@ -45,11 +30,11 @@ const CreatePersonPage = () => {
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
-        submitData={submitData}
+        submitData={request}
       />
-      {personId !== "" && (
+      {response && response.personId !== "" && (
         <ConfirmDialog
-          text={"Create successfully, client id: " + personId}
+          text={"Create successfully, client id: " + response.personId}
           confirmButtonText="Continue to create"
           cancelButtonText="Back to search"
           handleConfirm={handleContinue}

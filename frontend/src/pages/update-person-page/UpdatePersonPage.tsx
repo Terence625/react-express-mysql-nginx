@@ -66,9 +66,7 @@ const UpdatePersonPage = () => {
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
-        submitData={() => {
-          request();
-        }}
+        submitData={request}
       />
       {response === "OK" && (
         <ConfirmDialog

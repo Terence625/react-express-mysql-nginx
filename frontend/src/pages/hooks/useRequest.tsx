@@ -11,8 +11,8 @@ interface IUseRequestReturn<ResponseType> {
   isError: boolean;
   isLoading: boolean;
   request: () => Promise<void>;
-  response: ResponseType;
-  setResponse: (value: React.SetStateAction<ResponseType>) => void;
+  response: ResponseType | undefined;
+  setResponse: (value: React.SetStateAction<ResponseType | undefined>) => void;
 }
 
 const useRequest = <RequestBodyType, ResponseType>({
@@ -22,7 +22,7 @@ const useRequest = <RequestBodyType, ResponseType>({
 }: IUseRequestParams<RequestBodyType>): IUseRequestReturn<ResponseType> => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [response, setResponse] = useState({} as ResponseType);
+  const [response, setResponse] = useState<ResponseType | undefined>();
 
   const request = async () => {
     setIsLoading(true);
