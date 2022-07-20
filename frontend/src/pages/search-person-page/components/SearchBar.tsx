@@ -2,13 +2,13 @@ import React from "react";
 import "./SearchBar.css";
 
 interface ISearchBarProps {
-  search: () => void;
+  receiveData: () => void;
   searchValue: string;
   onSearchValueChange: (vaue: string) => void;
 }
 
 const SearchBar = ({
-  search,
+  receiveData,
   searchValue,
   onSearchValueChange,
 }: ISearchBarProps) => {
@@ -18,7 +18,7 @@ const SearchBar = ({
       onSubmit={(e) => {
         e.preventDefault();
         if (!searchValue.replace(/\s/g, "")) return;
-        search();
+        receiveData();
       }}
     >
       <input
