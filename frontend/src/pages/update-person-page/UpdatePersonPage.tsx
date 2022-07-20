@@ -5,19 +5,27 @@ import { useParams } from "react-router-dom";
 import ConfirmDialog from "../common/ConfirmDialog";
 import { useNavigate } from "react-router-dom";
 import PageContainer from "../common/PageContainer";
+import useRequest from "../hooks/useRequest";
 
 const UpdatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [isUpdated, setIsUpdated] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [isError, setIsError] = useState(false);
   const [isPersonNotExist, setIsPersonNotExist] = useState(false);
   const { personId } = useParams();
+  const { isError, isLoading, request, response, setResponse } = useRequest<
+    typeof formText,
+    string
+  >({
+    method: "put",
+    url: "/updatePerson/" + personId,
+    requestBody: formText,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
-      setIsError(false);
+      // setIsLoading(true);
+      // setIsError(false);
       try {
         const result = await axios({
           method: "get",
@@ -34,35 +42,17 @@ const UpdatePersonPage = () => {
           email: personInfo.email,
         });
       } catch (error) {
-        setIsError(true);
+        // setIsError(true);
       }
-      setIsLoading(false);
+      // setIsLoading(false);
     };
     fetchData();
+    // request();
+    // setFormText(response.personInfo[0]);
   }, []);
 
-  const submitData = async () => {
-    setIsLoading(true);
-    setIsError(false);
-    try {
-      await axios({
-        method: "put",
-        url: "/updatePerson/" + personId,
-        data: {
-          name: formText.name,
-          phone: formText.phone,
-          email: formText.email,
-        },
-      });
-      setIsUpdated(true);
-    } catch (error) {
-      setIsError(true);
-    }
-    setIsLoading(false);
-  };
-
   const handleContinue = () => {
-    setIsUpdated(false);
+    setResponse("");
   };
 
   let navigate = useNavigate();
@@ -76,9 +66,11 @@ const UpdatePersonPage = () => {
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
-        submitData={submitData}
+        submitData={() => {
+          request();
+        }}
       />
-      {isUpdated && (
+      {response === "OK" && (
         <ConfirmDialog
           text="Update successfully"
           confirmButtonText="Continue to update"
