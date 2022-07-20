@@ -9,17 +9,14 @@ const SearchPersonPage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [url, setUrl] = useState("/searchPerson?name=");
   const [currentPage, setCurrentPage] = useState(1);
-  const { isError, isLoading, response } = useRequest<
-    {},
-    {
-      personList: {
-        person_id: number;
-        name: string;
-        phone: string;
-        email: string;
-      }[];
-    }
-  >({
+  const { isError, isLoading, response } = useRequest<{
+    personList: {
+      person_id: number;
+      name: string;
+      phone: string;
+      email: string;
+    }[];
+  }>({
     method: "get",
     url,
   });
@@ -27,7 +24,7 @@ const SearchPersonPage = () => {
   return (
     <PageContainer isLoading={isLoading} isError={isError}>
       <SearchBar
-        onSearch={() => setUrl(`searchPerson?name=${searchValue}`)}
+        search={() => setUrl(`searchPerson?name=${searchValue}`)}
         searchValue={searchValue}
         onSearchValueChange={(value) => setSearchValue(value)}
       />

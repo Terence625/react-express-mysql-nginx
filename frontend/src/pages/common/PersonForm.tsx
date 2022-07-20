@@ -38,13 +38,13 @@ interface Input {
 interface IPersonFormProps {
   formText: Input;
   onInputChange: (input: Input) => void;
-  onSubmit: () => void;
+  submitData: () => void;
 }
 
 const PersonForm = ({
   formText,
   onInputChange,
-  onSubmit,
+  submitData,
 }: IPersonFormProps) => {
   const [errorMsg, setErrormsg] = useState(initialErrorMsg);
   const [waitingForConfirm, setWaitingForConfirm] = useState(false);
@@ -76,7 +76,7 @@ const PersonForm = ({
 
   const handleConfirm = () => {
     setWaitingForConfirm(false);
-    onSubmit();
+    submitData();
   };
 
   const handleCancel = () => {
