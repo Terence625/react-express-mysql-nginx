@@ -24,6 +24,7 @@ const UpdatePersonPage = () => {
           url: "/" + personId,
         });
         const personInfo = result.data.personInfo[0];
+        console.log(result.data)
         if (personInfo === undefined) {
           setIsPersonNotExist(true);
           return;
@@ -76,7 +77,7 @@ const UpdatePersonPage = () => {
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
-        submitData={submitData}
+        onSubmit={submitData}
       />
       {isUpdated && (
         <ConfirmDialog

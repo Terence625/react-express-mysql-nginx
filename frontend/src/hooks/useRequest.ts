@@ -1,37 +1,38 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-interface IUseRequestParams {
+interface IUseRequestParams<RequestType> {
   method: "post" | "get" | "put";
   url: string;
-  data?: object;
+  requestBody?: RequestType;
 }
 
-interface IUseRequestResult<T> {
+interface IUseRequestResult<ResponseType> {
   isError: boolean;
   isLoading: boolean;
-  response: T | undefined;
+  response: ResponseType | null;
+  setResponse: React.Dispatch<React.SetStateAction<ResponseType | null>>;
 }
 
-const useRequest = <T>({
+const useRequest = <RequestType, ResponseType>({
   method,
   url,
-  data,
-}: IUseRequestParams): IUseRequestResult<T> => {
+  requestBody,
+}: IUseRequestParams<RequestType>): IUseRequestResult<ResponseType> => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [response, setResponse] = useState<T>();
+  const [response, setResponse] = useState<ResponseType | null>(null);
   const firstUpdate = useRef(true);
   const request = async () => {
     setIsLoading(true);
     setIsError(false);
     try {
-      const result = await axios({
+      const { data } = await axios.request({
         method: method,
         url: url,
-        data: data,
+        data: requestBody,
       });
-      setResponse(result.data);
+      setResponse(data);
     } catch (error) {
       setIsError(true);
     }
@@ -43,9 +44,9 @@ const useRequest = <T>({
       return;
     }
     request();
-  }, [url]);
+  }, [url, requestBody]);
 
-  return { isError, isLoading, response };
+  return { isError, isLoading, response, setResponse };
 };
 
 export default useRequest;
