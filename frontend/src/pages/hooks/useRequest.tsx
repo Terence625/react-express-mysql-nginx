@@ -10,9 +10,7 @@ interface IUseRequestParams<RequestBodyType> {
 interface IUseRequestReturn<ResponseType> {
   isError: boolean;
   isLoading: boolean;
-  request: () => Promise<void>;
-  response: ResponseType | undefined;
-  setResponse: (value: React.SetStateAction<ResponseType | undefined>) => void;
+  request: () => Promise<ResponseType>;
 }
 
 const useRequest = <RequestBodyType, ResponseType>({
@@ -22,7 +20,6 @@ const useRequest = <RequestBodyType, ResponseType>({
 }: IUseRequestParams<RequestBodyType>): IUseRequestReturn<ResponseType> => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [response, setResponse] = useState<ResponseType | undefined>();
 
   const request = async () => {
     setIsLoading(true);
@@ -33,14 +30,16 @@ const useRequest = <RequestBodyType, ResponseType>({
         url: url,
         data: requestBody,
       });
-      setResponse(data);
+      setIsLoading(false);
+      return data;
     } catch (error) {
+      console.log(error)
       setIsError(true);
     }
     setIsLoading(false);
   };
 
-  return { isError, isLoading, request, response, setResponse };
+  return { isError, isLoading, request };
 };
 
 export default useRequest;

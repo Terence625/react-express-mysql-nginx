@@ -7,52 +7,44 @@ import { useNavigate } from "react-router-dom";
 import PageContainer from "../common/PageContainer";
 import useRequest from "../hooks/useRequest";
 
+type PersonInfo = Array<{
+  person_id: string;
+  name: string;
+  phone: string;
+  email: string;
+}>;
+
 const UpdatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [isError, setIsError] = useState(false);
   const [isPersonNotExist, setIsPersonNotExist] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
   const { personId } = useParams();
-  const { isError, isLoading, request, response, setResponse } = useRequest<
-    typeof formText,
-    string
-  >({
+  const {
+    isError: isPutError,
+    isLoading: isPutLoading,
+    request: putRequest,
+  } = useRequest<typeof formText, string>({
     method: "put",
     url: "/updatePerson/" + personId,
     requestBody: formText,
   });
+  const {
+    isError: isGetError,
+    isLoading: isGetLoading,
+    request: getRequest,
+  } = useRequest<{}, { personInfo: PersonInfo }>({
+    method: "get",
+    url: "/" + personId,
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
-      // setIsLoading(true);
-      // setIsError(false);
-      try {
-        const result = await axios({
-          method: "get",
-          url: "/" + personId,
-        });
-        const personInfo = result.data.personInfo[0];
-        if (personInfo === undefined) {
-          setIsPersonNotExist(true);
-          return;
-        }
-        setFormText({
-          name: personInfo.name,
-          phone: personInfo.phone,
-          email: personInfo.email,
-        });
-      } catch (error) {
-        // setIsError(true);
-      }
-      // setIsLoading(false);
-    };
-    fetchData();
-    // request();
-    // setFormText(response.personInfo[0]);
+    getRequest().then((res) => {
+      if (res.personInfo.length !== 0) setFormText(res.personInfo[0]);
+    });
   }, []);
 
   const handleContinue = () => {
-    setResponse("");
+    setIsUpdated(false);
   };
 
   let navigate = useNavigate();
@@ -62,13 +54,20 @@ const UpdatePersonPage = () => {
   return isPersonNotExist ? (
     <div>Person not exist</div>
   ) : (
-    <PageContainer isLoading={isLoading} isError={isError}>
+    <PageContainer
+      isError={isPutError || isGetError}
+      isLoading={isPutLoading || isGetLoading}
+    >
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
-        submitData={request}
+        submitData={() =>
+          putRequest().then((res) => {
+            if (res === "OK") setIsUpdated(true);
+          })
+        }
       />
-      {response === "OK" && (
+      {isUpdated && (
         <ConfirmDialog
           text="Update successfully"
           confirmButtonText="Continue to update"

@@ -7,7 +7,8 @@ import useRequest from "../hooks/useRequest";
 
 const CreatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
-  const { isError, isLoading, request, response, setResponse } = useRequest<
+  const [personId, setPersonId] = useState("");
+  const { isError, isLoading, request} = useRequest<
     typeof formText,
     { personId: string }
   >({
@@ -20,7 +21,7 @@ const CreatePersonPage = () => {
 
   const handleContinue = () => {
     setFormText({ name: "", phone: "", email: "" });
-    setResponse({ personId: "" });
+    setPersonId("");
   };
 
   const handleBack = () => navigate("/searchPerson");
@@ -30,11 +31,11 @@ const CreatePersonPage = () => {
       <PersonForm
         formText={formText}
         onInputChange={(value) => setFormText(value)}
-        submitData={request}
+        submitData={() => request().then((res) => setPersonId(res.personId))}
       />
-      {response && response.personId !== "" && (
+      {personId !== "" && (
         <ConfirmDialog
-          text={"Create successfully, client id: " + response.personId}
+          text={"Create successfully, client id: " + personId}
           confirmButtonText="Continue to create"
           cancelButtonText="Back to search"
           handleConfirm={handleContinue}
