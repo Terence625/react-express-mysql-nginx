@@ -1,32 +1,44 @@
-import React, {useState, useEffect} from 'react'
-import PageContainer from '../common/PageContainer'
-import Table from '../common/Table'
+import React, { useState, useEffect } from "react";
+import PageContainer from "../common/PageContainer";
+import Table from "../common/Table";
+import useRequest from "../hooks/useRequest";
 
-const initialPeopleList = [
-  { name: "Terence", dob: "1993-04-25", nationality: "China" },
-  { name: "Jade", dob: "1998-12-08", nationality: "Indonesia" },
-];
 const columnHeader: {
-  key: "name" | "dob" | "nationality";
+  key: "name" | "phone" | "email";
   label: string;
 }[] = [
   { key: "name", label: "Name" },
-  { key: "dob", label: "Date of Birthday" },
-  { key: "nationality", label: "Nationality" },
+  { key: "phone", label: "Phone" },
+  { key: "email", label: "Email" },
 ];
 
+type PeopleListType = Array<{
+  name: string;
+  phone: string;
+  email: string;
+}>;
+
 const PersonTablePage = () => {
-  const [peopleList, setPeopleList] = useState(initialPeopleList);
+  const [peopleList, setPeopleList] = useState<PeopleListType>([]);
+  const { isError, isLoading, request } = useRequest<
+    {},
+    { personList: PeopleListType }
+  >({
+    method: "get",
+    url: "/searchPerson?name=",
+  });
 
   useEffect(() => {
-    
-  })
+    request().then((res) => {
+      setPeopleList(res.personList);
+    });
+  }, []);
 
   return (
-    <PageContainer isLoading={false} isError={false}>
-      <Table columnHeaderList={columnHeader} rowList={peopleList}/>
+    <PageContainer isError={isError} isLoading={isLoading}>
+      <Table columnHeaderList={columnHeader} rowList={peopleList} />
     </PageContainer>
-  )
-}
+  );
+};
 
-export default PersonTablePage
+export default PersonTablePage;

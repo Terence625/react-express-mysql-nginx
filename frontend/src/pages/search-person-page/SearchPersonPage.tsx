@@ -15,7 +15,7 @@ const SearchPersonPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [personList, setPersonList] = useState<PersonListType>();
   const { isError, isLoading, request } = useRequest<
-    string,
+    {},
     { personList: PersonListType }
   >({
     method: "get",

@@ -8,7 +8,7 @@ import useRequest from "../hooks/useRequest";
 const CreatePersonPage = () => {
   const [formText, setFormText] = useState({ name: "", phone: "", email: "" });
   const [personId, setPersonId] = useState("");
-  const { isError, isLoading, request} = useRequest<
+  const { isError, isLoading, request } = useRequest<
     typeof formText,
     { personId: string }
   >({
